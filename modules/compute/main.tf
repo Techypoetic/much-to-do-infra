@@ -53,7 +53,7 @@ resource "aws_iam_instance_profile" "ec2_profile" {
 resource "aws_instance" "backend" {
   count                  = 2
   ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = "t3.micro"
+  instance_type          = "t3.small"
   subnet_id              = var.private_subnet_ids[count.index]
   vpc_security_group_ids = [var.backend_sg_id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
