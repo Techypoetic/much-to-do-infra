@@ -23,6 +23,7 @@ git clone -b main https://github.com/Techypoetic/much-to-do.git .
 cd Server/MuchToDo
 export GOPATH=/root/go
 export GOMODCACHE=/root/go/pkg/mod
+export GOCACHE=/root/.cache/go-build
 /usr/local/go/bin/go build -buildvcs=false -o much-to-do-server ./cmd/api
 chown appuser:appuser much-to-do-server
 
