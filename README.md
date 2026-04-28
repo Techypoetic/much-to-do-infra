@@ -1,13 +1,15 @@
+```markdown
 # much-to-do-infra
 
 Terraform infrastructure for the Much-To-Do full-stack application.
 
-Live: https://dfjvg2100os8x.cloudfront.net
+**Live:** https://dfjvg2100os8x.cloudfront.net
 
 ---
 
-Architecture
+## Architecture
 
+```text
 Internet
    │
    ├── HTTPS ──► CloudFront ──► S3 (React SPA)
@@ -24,11 +26,12 @@ Internet
         - EC2 Backend x2 :8080
         - EC2 MongoDB :27017
         - ElastiCache Redis :6379
+```
 
-EC2 ──► CloudWatch Logs  
-EC2 ──► Systems Manager (no SSH)
+· EC2 ──► CloudWatch Logs
+· EC2 ──► Systems Manager (no SSH)
 
-CloudFront serves static assets from S3 and routes "/api/*" to the ALB.
+CloudFront serves static assets from S3 and routes /api/* to the ALB.
 The ALB distributes traffic across backend instances in separate availability zones.
 Backend services run in private subnets with no public exposure.
 
@@ -36,6 +39,7 @@ Backend services run in private subnets with no public exposure.
 
 Structure
 
+```text
 much-to-do-infra/
 ├── main.tf
 ├── variables.tf
@@ -49,6 +53,7 @@ much-to-do-infra/
 │   └── frontend/
 ├── userdata/
 │   └── backend.sh
+```
 
 ---
 
@@ -56,21 +61,27 @@ Deployment
 
 Bootstrap remote state (S3 + DynamoDB), then:
 
+```bash
 git clone https://github.com/Techypoetic/much-to-do-infra.git
 cd much-to-do-infra
 terraform init
+```
 
-Create "terraform.tfvars" (do not commit):
+Create terraform.tfvars (do not commit):
 
+```hcl
 db_username = "admin"
 db_password = "..."
 jwt_secret  = "..."
+```
 
 Apply:
 
+```bash
 terraform plan
 terraform apply
 terraform output
+```
 
 ---
 
@@ -79,21 +90,23 @@ CI/CD
 Pipelines are defined in the application repository:
 https://github.com/Techypoetic/much-to-do
 
-- Frontend: builds React app, uploads to S3, invalidates CloudFront
-- Backend: rolling deploy via SSM (pull, build, restart service)
+· Frontend: builds React app, uploads to S3, invalidates CloudFront
+· Backend: rolling deploy via SSM (pull, build, restart service)
 
 ---
 
 Observability
 
-- CloudWatch Logs: "/much-to-do/backend"
-- One log stream per instance
+· CloudWatch Logs: /much-to-do/backend
+· One log stream per instance
 
 ---
 
 Teardown
 
+```bash
 terraform destroy
+```
 
 Remote state resources are managed separately.
 
@@ -101,5 +114,7 @@ Remote state resources are managed separately.
 
 Repositories
 
-- https://github.com/Techypoetic/much-to-do-infra — Infrastructure
-- https://github.com/Techypoetic/much-to-do — Application
+· much-to-do-infra — Infrastructure
+· much-to-do — Application
+
+```
