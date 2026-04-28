@@ -1,4 +1,4 @@
-#much-to-do-infra
+# much-to-do-infra
 
 Terraform infrastructure for the Much-To-Do full-stack application.
 
