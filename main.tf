@@ -55,7 +55,7 @@ module "compute" {
   db_username        = var.db_username
   db_password        = var.db_password
   jwt_secret         = var.jwt_secret
-  cloudfront_url     = module.frontend.cloudfront_url
+  cloudfront_url = "https://${module.frontend.cloudfront_domain_name}"
 }
 
 module "frontend" {
