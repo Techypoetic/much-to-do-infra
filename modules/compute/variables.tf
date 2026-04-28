@@ -9,4 +9,6 @@ variable "mongodb_host"       {}
 variable "redis_host"         {}
 variable "db_username"        { sensitive = true }
 variable "db_password"        { sensitive = true }
+variable "jwt_secret"         { sensitive = true }
+variable "cloudfront_url"     {}
 variable "aws_region"         { default = "us-east-1" }

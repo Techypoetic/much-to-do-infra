@@ -59,11 +59,13 @@ resource "aws_instance" "backend" {
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
 
   user_data = base64encode(templatefile("${path.root}/userdata/backend.sh", {
-    mongodb_host = var.mongodb_host
-    redis_host   = var.redis_host
-    db_username  = var.db_username
-    db_password  = var.db_password
-    project_name = var.project_name
+  mongodb_host   = var.mongodb_host
+  redis_host     = var.redis_host
+  db_username    = var.db_username
+  db_password    = var.db_password
+  project_name   = var.project_name
+  jwt_secret     = var.jwt_secret
+  cloudfront_url = var.cloudfront_url
   }))
 
   tags = {

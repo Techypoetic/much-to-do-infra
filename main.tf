@@ -54,6 +54,8 @@ module "compute" {
   redis_host         = module.database.redis_endpoint
   db_username        = var.db_username
   db_password        = var.db_password
+  jwt_secret         = var.jwt_secret
+  cloudfront_url     = module.frontend.cloudfront_url
 }
 
 module "frontend" {

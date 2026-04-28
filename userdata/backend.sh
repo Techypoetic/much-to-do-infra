@@ -28,15 +28,22 @@ export GOCACHE=/root/.cache/go-build
 chown appuser:appuser much-to-do-server
 
 # ── 3. Environment file ──────────────────────────────────────────────────────
-cat > /opt/much-to-do/Server/.env << ENVFILE
+cat > /opt/much-to-do/Server/MuchToDo/.env << ENVFILE
 PORT=8080
-MONGODB_URI=mongodb://${db_username}:${db_password}@${mongodb_host}:27017/muchtodo?authSource=admin
-REDIS_HOST=${redis_host}
-REDIS_PORT=6379
+MONGO_URI=mongodb://${db_username}:${db_password}@${mongodb_host}:27017/muchtodo?authSource=admin
+DB_NAME=muchtodo
+JWT_SECRET_KEY=${jwt_secret}
+JWT_EXPIRATION_HOURS=72
+ENABLE_CACHE=true
+REDIS_ADDR=${redis_host}:6379
+REDIS_PASSWORD=
+LOG_LEVEL=info
+LOG_FORMAT=json
+ALLOWED_ORIGINS=https://${cloudfront_url}
 ENVFILE
 
-chmod 600 /opt/much-to-do/Server/.env
-chown appuser:appuser /opt/much-to-do/Server/.env
+chmod 600 /opt/much-to-do/Server/MuchToDo/.env
+chown appuser:appuser /opt/much-to-do/Server/MuchToDo/.env
 
 # ── 4. Log file ──────────────────────────────────────────────────────────────
 touch /var/log/much-to-do.log
@@ -52,7 +59,7 @@ After=network.target
 Type=simple
 User=appuser
 WorkingDirectory=/opt/much-to-do/Server/MuchToDo
-EnvironmentFile=/opt/much-to-do/Server/.env
+EnvironmentFile=/opt/much-to-do/Server/MuchToDo/.env
 ExecStart=/opt/much-to-do/Server/MuchToDo/much-to-do-server
 Restart=always
 RestartSec=5
