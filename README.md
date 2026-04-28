@@ -1,4 +1,3 @@
-```markdown
 # much-to-do-infra
 
 Terraform infrastructure for the Much-To-Do full-stack application.
@@ -116,5 +115,3 @@ Repositories
 
 · much-to-do-infra — Infrastructure
 · much-to-do — Application
-
-```
