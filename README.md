@@ -113,5 +113,5 @@ Remote state resources are managed separately.
 
 Repositories
 
-· much-to-do-infra — Infrastructure
-· much-to-do — Application
+https://github.com/Techypoetic/much-to-do-infra — Infrastructure
+https://github.com/Techypoetic/much-to-do — Application
